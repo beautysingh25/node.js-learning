@@ -1,51 +1,29 @@
-import {readFile, writeFile, appendFile, mkdir, readdir} from 'fs/promises'
+import {readFile, writeFile, appendFile, mkdir} from 'fs/promises'
 
-// Read file
-
-const readFileContent = async (filepath) => {
-    try {
-        const data = await readFile(filepath, 'utf-8')
-        console.log(data);
-    } catch (error) {
-        console.error(error)
-    }
-}
-
-await readFileContent('Sample.txt')
-
-//create file
-const createfile = async (filepath, content) => {
-    await writeFile(filepath, content)
-    console.log("file created successfully")
+const read_file = async (fileName) => {
+    const data = await readFile(fileName, "utf-8");
+    console.log(data);
     
 }
 
-// await createfile('inheritence.java', 'this is inheritence')
-// await createfile('text.py', 'this is inheritence')
-// await createfile('text.php', 'this is inheritence')
-
-//append data to file
-
-const appendtoFile = async(filepath, content) => {
-    await appendFile(filepath, content)
-    console.log("new content added successfully");
-    
+const create_file = async(filename, content)  => {
+    await writeFile(filename, content);
+    console.log("file created.");
 }
 
-await appendtoFile('Sample.txt', ' This is my new content')
-
-const createDirectory = async (dirPath) => {
-    await mkdir(dirPath,{recursive:true})
+const update_file = async (fileNme, content) => {
+    await appendFile(fileNme, content);
+    console.log("new content added");
 }
 
-await createDirectory("javaScript/day1/day2")
-
-// read directory content
-
-const readDir = async(dirPath) => {
-    const files = await readdir(dirPath)
-    console.log(files);
-    
+const create_folder = async(dir) => {
+    await mkdir(dir, {recursive:true});
+    console.log("folder created");
 }
 
-await readDir('superman')
+read_file('Sample.txt');
+create_file('file.java', "//this is a java file created");
+create_file('file.py', "#this is a py file created");
+update_file('Sample.txt', "this is new content");
+// create_folder("components");
+create_folder("src/components/java");
